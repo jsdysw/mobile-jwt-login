@@ -1,11 +1,11 @@
 const express = require('express');
 const morgan = require('morgan');
 const dotenv = require('dotenv');
+const authRouter = require('./routes/auth');
 
 dotenv.config();
 
 const { sequelize } = require('./models');
-
 
 const app = express();
 app.set('port', process.env.PORT || 3000);
@@ -18,9 +18,11 @@ sequelize.sync({ force: false })
   });
 
 
+
 app.use(morgan('dev'));
 app.use(express.json());
 
+app.use('/', authRouter);
 
 app.get('/',(req, res, next) => {
   res.json("hi");

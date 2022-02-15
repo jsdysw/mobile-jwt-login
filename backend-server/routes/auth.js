@@ -3,6 +3,7 @@ const bcrypt = require('bcrypt');
 const jwt = require('jsonwebtoken');
 
 const User = require('../models/user');
+const { verifyToken } = require('./middlewares')
 
 const router = express.Router();
 
@@ -12,7 +13,7 @@ router.post('/signup', async (req, res, next) => {
     const exUser = await User.findOne({ where: { email } });
     if (exUser) {
       return res.status(401).json({
-        message: '같은 계정의 사용자가 존재합니다.'
+        message: 'same email exists'
       });
     }
     const hash = await bcrypt.hash(password, 12);
@@ -22,7 +23,7 @@ router.post('/signup', async (req, res, next) => {
       password: hash,
     });
     return res.status(200).json({
-      message: '회원 가입 성공'
+      message: 'sign up succeed'
     });
   } catch (error) {
     console.error(error);
@@ -58,7 +59,7 @@ router.post('/login', async (req, res, next) => {
     const accesstoken = jwt.sign({
       email: email,
     }, process.env.JWT_SECRET, {
-      expiresIn: '30m', // 30 minute
+      expiresIn: '1m', // 1 minute
       issuer: 'admin',
     });
 
@@ -81,17 +82,31 @@ router.post('/login', async (req, res, next) => {
   }
 });
 
+
+router.post('/token', verifyToken, async (req, res, next) => {
+  // post token
+  try {
+    const accesstoken = jwt.sign({
+      email: req.decoded.email,
+    }, process.env.JWT_SECRET, {
+      expiresIn: '1m', // 1 minute
+      issuer: 'admin',
+    });
+
+    return res.status(200).json({
+      message: 'sign a new accesstoken succeed',
+      accesstoken,
+    })
+
+  } catch (error) {
+    console.error(error);
+    return next(error);
+  }
+});
+
 router.get('/logout', (req, res) => {
   // client shoud expire token
   res.status(200).json({message: 'logout'});
 });
-
-// router.get('/kakao', passport.authenticate('kakao'));
-
-// router.get('/kakao/callback', passport.authenticate('kakao', {
-//   failureRedirect: '/',
-// }), (req, res) => {
-//   res.redirect('/');
-// });
 
 module.exports = router;

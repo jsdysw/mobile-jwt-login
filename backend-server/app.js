@@ -3,6 +3,8 @@ const morgan = require('morgan');
 const dotenv = require('dotenv');
 const authRouter = require('./routes/auth');
 
+const { verifyToken } = require('./routes/middlewares');
+
 dotenv.config();
 
 const { sequelize } = require('./models');
@@ -11,7 +13,7 @@ const app = express();
 app.set('port', process.env.PORT || 3000);
 sequelize.sync({ force: false })
   .then(() => {
-    console.log('데이터베이스 연결 성공');
+    console.log('database connection succeed');
   })
   .catch((err) => {
     console.error(err);
@@ -24,12 +26,17 @@ app.use(express.json());
 
 app.use('/', authRouter);
 
-app.get('/',(req, res, next) => {
-  res.json("hi");
+// app.get('/test' , (req, res) => {
+//   return res.json("hi");
+// });
+
+
+app.get('/test', verifyToken , (req, res) => {
+  return res.json(req.decoded.email);
 });
 
 app.use((req, res, next) => {
-  const error =  new Error(`${req.method} ${req.url} 라우터가 없습니다.`);
+  const error =  new Error(`${req.method} ${req.url} router doesn't exist`);
   error.status = 404;
   next(error);
 });
@@ -42,5 +49,6 @@ app.use((err, req, res, next) => {
 });
 
 app.listen(app.get('port'), () => {
-  console.log(app.get('port'), '번 포트에서 대기 중');
+  console.log(app.get('port'), 'waiting');
 });
+

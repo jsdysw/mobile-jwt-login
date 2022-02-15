@@ -24,3 +24,14 @@ ex)
   },
 
 npx sequelize db:create
+
+##process
+
+0. signup
+1. login
+2. check db, response (access token, refresh token)
+3. user : api call with access token
+4. verify token -> reseponse
+5. if expired return error -> client call post token -> server check refresh token -> get new access token
+6. user : api call again with new access token
+ 

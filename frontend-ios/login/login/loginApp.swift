@@ -2,7 +2,7 @@
 //  loginApp.swift
 //  login
 //
-//  Created by 윤석원 on 2022/03/02.
+//  Created by jsdysw on 2022/03/02.
 //
 
 import SwiftUI

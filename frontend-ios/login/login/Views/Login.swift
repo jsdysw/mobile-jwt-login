@@ -32,7 +32,9 @@ struct Login: View {
             .frame(width: 350, height: 50)
 
             
-            Button(action: {}) {
+            Button(action: {
+                login(email: email, password: password)
+            }) {
                 Text("Sign In")
                     .font(.headline)
                     .foregroundColor(.white)

@@ -8,15 +8,14 @@
 import SwiftUI
 
 struct Login: View {
-    @State private var email: String = ""
-    @State private var password: String = ""
+    @EnvironmentObject var authentication: Authentication
+    @State private var loginVM = LoginViewModel()
     
     var body: some View {
         VStack (alignment : .center, spacing: 50) {
-            
             HStack {
                 Image(systemName: "person")
-                TextField("email", text: $email)
+                TextField("email", text: $loginVM.credentials.email)
                     .keyboardType(.emailAddress)
                     .padding()
                     .cornerRadius(20.0)
@@ -25,7 +24,7 @@ struct Login: View {
             
             HStack {
                 Image(systemName: "square.and.pencil")
-                SecureField("password", text:$password)
+                SecureField("password", text:$loginVM.credentials.password)
                     .padding()
                     .cornerRadius(20.0)
             }
@@ -33,7 +32,7 @@ struct Login: View {
 
             
             Button(action: {
-                login(email: email, password: password)
+                loginVM.login(authentication: authentication)
             }) {
                 Text("Sign In")
                     .font(.headline)
@@ -54,6 +53,7 @@ struct Login: View {
                     .cornerRadius(15.0)
             }
         }
+        .autocapitalization(/*@START_MENU_TOKEN@*/.none/*@END_MENU_TOKEN@*/)
     }
 }
 

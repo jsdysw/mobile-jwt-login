@@ -7,7 +7,7 @@
 
 import Foundation
 
-struct Credentials: Codable {
-    var email: String = ""
-    var password: String = ""
+class Credentials: ObservableObject {
+    @Published var email: String = ""
+    @Published var password: String = ""
 }

@@ -15,6 +15,8 @@
 		AA2A019327CF30800081A6E7 /* Login.swift in Sources */ = {isa = PBXBuildFile; fileRef = AA2A019227CF30800081A6E7 /* Login.swift */; };
 		AA2A01A127D375150081A6E7 /* APIs.swift in Sources */ = {isa = PBXBuildFile; fileRef = AA2A01A027D375150081A6E7 /* APIs.swift */; };
 		AA2A01BF27D382B60081A6E7 /* Alamofire in Frameworks */ = {isa = PBXBuildFile; productRef = AA2A01BE27D382B60081A6E7 /* Alamofire */; };
+		AA2A01C127D3B9B90081A6E7 /* LoginViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = AA2A01C027D3B9B90081A6E7 /* LoginViewModel.swift */; };
+		AA2A01C327D3BCC80081A6E7 /* Authentication.swift in Sources */ = {isa = PBXBuildFile; fileRef = AA2A01C227D3BCC80081A6E7 /* Authentication.swift */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
@@ -27,6 +29,8 @@
 		AA2A019027CE849D0081A6E7 /* Credentials.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Credentials.swift; sourceTree = "<group>"; };
 		AA2A019227CF30800081A6E7 /* Login.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Login.swift; sourceTree = "<group>"; };
 		AA2A01A027D375150081A6E7 /* APIs.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = APIs.swift; sourceTree = "<group>"; };
+		AA2A01C027D3B9B90081A6E7 /* LoginViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = LoginViewModel.swift; sourceTree = "<group>"; };
+		AA2A01C227D3BCC80081A6E7 /* Authentication.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Authentication.swift; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -61,6 +65,7 @@
 			isa = PBXGroup;
 			children = (
 				AA2A017F27CE7DB50081A6E7 /* loginApp.swift */,
+				AA2A01C227D3BCC80081A6E7 /* Authentication.swift */,
 				AA2A019F27D374E50081A6E7 /* Services */,
 				AA2A018E27CE84340081A6E7 /* Views */,
 				AA2A018F27CE84690081A6E7 /* Models */,
@@ -92,6 +97,7 @@
 			isa = PBXGroup;
 			children = (
 				AA2A019027CE849D0081A6E7 /* Credentials.swift */,
+				AA2A01C027D3B9B90081A6E7 /* LoginViewModel.swift */,
 			);
 			path = Models;
 			sourceTree = "<group>";
@@ -179,8 +185,10 @@
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				AA2A01C327D3BCC80081A6E7 /* Authentication.swift in Sources */,
 				AA2A019127CE849D0081A6E7 /* Credentials.swift in Sources */,
 				AA2A018227CE7DB50081A6E7 /* ContentView.swift in Sources */,
+				AA2A01C127D3B9B90081A6E7 /* LoginViewModel.swift in Sources */,
 				AA2A018027CE7DB50081A6E7 /* loginApp.swift in Sources */,
 				AA2A01A127D375150081A6E7 /* APIs.swift in Sources */,
 				AA2A019327CF30800081A6E7 /* Login.swift in Sources */,

@@ -10,50 +10,59 @@ import SwiftUI
 struct Login: View {
     @EnvironmentObject var authentication: Authentication
     @State private var loginVM = LoginViewModel()
+    @State private var singupView: String? = ""
+
     
     var body: some View {
-        VStack (alignment : .center, spacing: 50) {
-            HStack {
-                Image(systemName: "person")
-                TextField("email", text: $loginVM.credentials.email)
-                    .keyboardType(.emailAddress)
-                    .padding()
-                    .cornerRadius(20.0)
-            }
-            .frame(width: 350, height: 50)
-            
-            HStack {
-                Image(systemName: "square.and.pencil")
-                SecureField("password", text:$loginVM.credentials.password)
-                    .padding()
-                    .cornerRadius(20.0)
-            }
-            .frame(width: 350, height: 50)
+        NavigationView {
+            VStack (alignment : .center, spacing: 50) {
+                HStack {
+                    Image(systemName: "person")
+                    TextField("email", text: $loginVM.email)
+                        .keyboardType(.emailAddress)
+                        .padding()
+                        .cornerRadius(20.0)
+                }
+                .frame(width: 350, height: 50)
+                
+                HStack {
+                    Image(systemName: "square.and.pencil")
+                    SecureField("password", text:$loginVM.password)
+                        .padding()
+                        .cornerRadius(20.0)
+                }
+                .frame(width: 350, height: 50)
 
-            
-            Button(action: {
-                loginVM.login(authentication: authentication)
-            }) {
-                Text("Sign In")
-                    .font(.headline)
-                    .foregroundColor(.white)
-                    .padding()
-                    .frame(width: 300, height: 50)
-                    .background(Color.green)
-                    .cornerRadius(15.0)
+                
+                Button(action: {
+                    loginVM.login(authentication: authentication)
+                }) {
+                    Text("Sign In")
+                        .font(.headline)
+                        .foregroundColor(.white)
+                        .padding()
+                        .frame(width: 300, height: 50)
+                        .background(Color.green)
+                        .cornerRadius(15.0)
+                }
+                
+               
+                NavigationLink(destination: Signup().environmentObject(authentication), tag: "signup", selection: $singupView) {
+                    Button(action: {
+                        self.singupView = "signup"
+                    }) {
+                        Text("Sign Up")
+                            .font(.headline)
+                            .foregroundColor(.white)
+                            .padding()
+                            .frame(width: 300, height: 50)
+                            .background(Color.blue)
+                            .cornerRadius(15.0)
+                    }
+                }
             }
-            
-            Button(action: {}) {
-                Text("Sign up")
-                    .font(.headline)
-                    .foregroundColor(.white)
-                    .padding()
-                    .frame(width: 300, height: 50)
-                    .background(Color.blue)
-                    .cornerRadius(15.0)
-            }
+            .autocapitalization(.none)
         }
-        .autocapitalization(/*@START_MENU_TOKEN@*/.none/*@END_MENU_TOKEN@*/)
     }
 }
 

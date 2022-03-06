@@ -25,6 +25,9 @@ class Authentication: ObservableObject {
         let message: String?
     }
     
+    init(email: String) {
+        self.email = email;
+    }
     
     init() {
         let sendJSON = RequestBody(email: email, refreshtoken: refreshtoken)
@@ -43,7 +46,11 @@ class Authentication: ObservableObject {
                 print(error)
             }
         }
-        
+        print(isLoggedin)
+        print(accesstoken)
+        print(refreshtoken)
+        print(email)
+        print("initialize finished")
     }
     
     func updateValidation(success: Bool) {

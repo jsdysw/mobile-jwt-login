@@ -10,12 +10,26 @@ const router = express.Router();
 router.post('/signup', async (req, res, next) => {
   const { email, nick, password } = req.body;
   try {
+    if (!email || !password || !nick) {
+      return res.status(401).json({
+        message: 'blanks are not allowed',
+      });
+    }
+
     const exUser = await User.findOne({ where: { email } });
     if (exUser) {
       return res.status(401).json({
         message: 'same email exists'
       });
     }
+
+    const exNick = await User.findOne({ where: { nick } });
+    if (exNick) {
+      return res.status(401).json({
+        message: 'same nickname exists'
+      });
+    }
+
     const hash = await bcrypt.hash(password, 12);
     await User.create({
       email,
@@ -36,6 +50,11 @@ router.post('/login', async (req, res, next) => {
 
   // id, password match
   try {
+    if (!email || !password) {
+      return res.status(401).json({
+        message: 'blanks are not allowed',
+      });
+    }
     const exUser = await User.findOne({ where: { email } });
     if (exUser) {
       const result = await bcrypt.compare(password, exUser.password);

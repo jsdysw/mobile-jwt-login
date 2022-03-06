@@ -9,7 +9,8 @@ import Foundation
 import Alamofire
 
 class LoginViewModel: ObservableObject {
-    @Published var credentials = Credentials()
+    @Published var email: String = ""
+    @Published var password: String = ""    
     
     struct LoginRequestBody: Codable {
         let email: String
@@ -23,7 +24,7 @@ class LoginViewModel: ObservableObject {
     }
     
     func login(authentication: Authentication) {
-        let login = LoginRequestBody(email: credentials.email, password: credentials.password)
+        let login = LoginRequestBody(email: email, password: password)
         AF.request("http://localhost:3000/login", method: .post, parameters: login, encoder: JSONParameterEncoder.default).responseJSON { response in
             var loginRes: LoginResponse
             do {
@@ -33,6 +34,7 @@ class LoginViewModel: ObservableObject {
                     authentication.updateValidation(success: true)
                     authentication.accesstoken = loginRes.accesstoken ?? ""
                     authentication.refreshtoken = loginRes.refreshtoken ?? ""
+                    authentication.email = login.email
                 }
                 debugPrint(loginRes)
             } catch let error {

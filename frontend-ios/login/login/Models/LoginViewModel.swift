@@ -8,9 +8,9 @@
 import Foundation
 import Alamofire
 
-class LoginViewModel: ObservableObject {
-    @Published var email: String = ""
-    @Published var password: String = ""    
+class LoginViewModel {
+    var email: String = ""
+    var password: String = ""
     
     struct LoginRequestBody: Codable {
         let email: String

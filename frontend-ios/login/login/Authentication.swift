@@ -14,7 +14,6 @@ class Authentication: ObservableObject {
     @Published var refreshtoken: String = ""
     @Published var email: String = ""
     
-    
     struct RequestBody: Codable {
         let email: String
         let refreshtoken: String

@@ -9,13 +9,21 @@ import SwiftUI
 
 struct Signup: View {
     @Environment(\.presentationMode) var presentationMode: Binding<PresentationMode>
-    @State private var singupVM = SignupViewModel()
+    @State private var signupVM = SignupViewModel()
 
+    func signup() {
+        signupVM.signup { success in
+            if (success) {
+                self.presentationMode.wrappedValue.dismiss()
+            }
+        }
+    }
+    
     var body: some View {
         VStack (alignment : .center, spacing: 50) {
             HStack {
                 Image(systemName: "person")
-                TextField("email", text: $singupVM.email)
+                TextField("email", text: $signupVM.email)
                     .keyboardType(.emailAddress)
                     .padding()
                     .cornerRadius(20.0)
@@ -24,7 +32,7 @@ struct Signup: View {
             
             HStack {
                 Image(systemName: "person")
-                TextField("nickname", text: $singupVM.nick)
+                TextField("nickname", text: $signupVM.nick)
                     .padding()
                     .cornerRadius(20.0)
             }
@@ -32,7 +40,7 @@ struct Signup: View {
             
             HStack {
                 Image(systemName: "square.and.pencil")
-                SecureField("password", text: $singupVM.password)
+                SecureField("password", text: $signupVM.password)
                     .padding()
                     .cornerRadius(20.0)
             }
@@ -40,8 +48,7 @@ struct Signup: View {
 
             
             Button(action: {
-//                singupVM.singup()
-                self.presentationMode.wrappedValue.dismiss()
+                signup()
             }) {
                 Text("Sign up")
                     .font(.headline)

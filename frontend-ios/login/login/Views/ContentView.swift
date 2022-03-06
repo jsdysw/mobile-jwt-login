@@ -8,8 +8,20 @@
 import SwiftUI
 
 struct ContentView: View {
+    @EnvironmentObject var authentication: Authentication
+
     var body: some View {
-        Text("hi");
+        Button(action: {
+            authentication.logout()
+        }) {
+            Text("log out")
+                .font(.headline)
+                .foregroundColor(.white)
+                .padding()
+                .frame(width: 300, height: 50)
+                .background(Color.green)
+                .cornerRadius(15.0)
+        }
     }
 }
 

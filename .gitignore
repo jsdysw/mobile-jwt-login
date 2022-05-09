@@ -1,5 +1,5 @@
 /backend-server/node_modules
 /backend-server/migrations
 /backend-server/seeders
-/backend-server/.env
-/backend-server/config
+# /backend-server/.env
+# /backend-server/config
